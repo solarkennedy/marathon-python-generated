@@ -37,136 +37,13 @@ class Body2(object):
                                   and the value is json key in definition.
         """
         self.swagger_types = {
-            'id': 'PathType',
-            'apps': 'list[AppDefinition1]',
-            'groups': 'list[]',
-            'dependencies': 'list[PathType]',
-            'version': 'datetime'
+            
         }
 
         self.attribute_map = {
-            'id': 'id',
-            'apps': 'apps',
-            'groups': 'groups',
-            'dependencies': 'dependencies',
-            'version': 'version'
+            
         }
 
-        self._id = None
-        self._apps = None
-        self._groups = None
-        self._dependencies = None
-        self._version = None
-
-    @property
-    def id(self):
-        """
-        Gets the id of this Body2.
-        Unique identifier for the app consisting of a series of names separated by slashes. Each name must be at least 1 character and may only contain digits (`0-9`), dashes (`-`), dots (`.`), and lowercase letters (`a-z`). The name may not begin or end with a dash.
-
-        :return: The id of this Body2.
-        :rtype: PathType
-        """
-        return self._id
-
-    @id.setter
-    def id(self, id):
-        """
-        Sets the id of this Body2.
-        Unique identifier for the app consisting of a series of names separated by slashes. Each name must be at least 1 character and may only contain digits (`0-9`), dashes (`-`), dots (`.`), and lowercase letters (`a-z`). The name may not begin or end with a dash.
-
-        :param id: The id of this Body2.
-        :type: PathType
-        """
-        self._id = id
-
-    @property
-    def apps(self):
-        """
-        Gets the apps of this Body2.
-        The list of AppDefinitions in this group. See AppDefinition.json for the schema.
-
-        :return: The apps of this Body2.
-        :rtype: list[AppDefinition1]
-        """
-        return self._apps
-
-    @apps.setter
-    def apps(self, apps):
-        """
-        Sets the apps of this Body2.
-        The list of AppDefinitions in this group. See AppDefinition.json for the schema.
-
-        :param apps: The apps of this Body2.
-        :type: list[AppDefinition1]
-        """
-        self._apps = apps
-
-    @property
-    def groups(self):
-        """
-        Gets the groups of this Body2.
-        Groups can build a tree. Each group can contain sub-groups. The sub-groups are defined here.
-
-        :return: The groups of this Body2.
-        :rtype: list[]
-        """
-        return self._groups
-
-    @groups.setter
-    def groups(self, groups):
-        """
-        Sets the groups of this Body2.
-        Groups can build a tree. Each group can contain sub-groups. The sub-groups are defined here.
-
-        :param groups: The groups of this Body2.
-        :type: list[]
-        """
-        self._groups = groups
-
-    @property
-    def dependencies(self):
-        """
-        Gets the dependencies of this Body2.
-        A list of services upon which this application depends. An order is derived from the dependencies for performing start/stop and upgrade of the application. For example, an application /a relies on the services /b which itself relies on /c. To start all 3 applications, first /c is started than /b than /a.
-
-        :return: The dependencies of this Body2.
-        :rtype: list[PathType]
-        """
-        return self._dependencies
-
-    @dependencies.setter
-    def dependencies(self, dependencies):
-        """
-        Sets the dependencies of this Body2.
-        A list of services upon which this application depends. An order is derived from the dependencies for performing start/stop and upgrade of the application. For example, an application /a relies on the services /b which itself relies on /c. To start all 3 applications, first /c is started than /b than /a.
-
-        :param dependencies: The dependencies of this Body2.
-        :type: list[PathType]
-        """
-        self._dependencies = dependencies
-
-    @property
-    def version(self):
-        """
-        Gets the version of this Body2.
-        The version of this definition.
-
-        :return: The version of this Body2.
-        :rtype: datetime
-        """
-        return self._version
-
-    @version.setter
-    def version(self, version):
-        """
-        Sets the version of this Body2.
-        The version of this definition.
-
-        :param version: The version of this Body2.
-        :type: datetime
-        """
-        self._version = version
 
     def to_dict(self):
         """

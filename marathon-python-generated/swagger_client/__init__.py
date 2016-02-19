@@ -1,33 +1,41 @@
 from __future__ import absolute_import
 
 # import models into sdk package
-from .models.app_definition import AppDefinition
-from .models.group import Group
-from .models.app_definition1 import AppDefinition1
-from .models.v2apps_container_persistent import V2appsContainerPersistent
-from .models.v2apps_container_volumes import V2appsContainerVolumes
-from .models.v2apps_container_docker_parameters import V2appsContainerDockerParameters
-from .models.v2apps_container_docker_port_mappings import V2appsContainerDockerPortMappings
-from .models.v2apps_container_docker import V2appsContainerDocker
-from .models.v2apps_container import V2appsContainer
-from .models.v2apps_fetch import V2appsFetch
-from .models.v2apps_health_checks import V2appsHealthChecks
-from .models.v2apps_ip_address_discovery_ports import V2appsIpAddressDiscoveryPorts
-from .models.v2apps_ip_address_discovery import V2appsIpAddressDiscovery
-from .models.v2apps_ip_address import V2appsIpAddress
-from .models.v2apps_residency import V2appsResidency
-from .models.v2apps_upgrade_strategy import V2appsUpgradeStrategy
-from .models.v2apps_version_info import V2appsVersionInfo
+from .models.v2_appsrequest import V2Appsrequest
+from .models.container import Container
+from .models.docker import Docker
+from .models.network import Network
+from .models.parameter import Parameter
+from .models.port_mapping import PortMapping
+from .models.type import Type
+from .models.volume import Volume
+from .models.persistent import Persistent
+from .models.mode import Mode
+from .models.fetch import Fetch
+from .models.health_check import HealthCheck
+from .models.command import Command
+from .models.protocol import Protocol
+from .models.ip_address import IpAddress
+from .models.discovery import Discovery
+from .models.port import Port
+from .models.protocol17 import Protocol17
+from .models.residency import Residency
+from .models.task_lost_behavior import TaskLostBehavior
+from .models.upgrade_strategy import UpgradeStrategy
+from .models.version_info import VersionInfo
+from .models.status_enum import StatusEnum
+from .models.inline_response_200 import InlineResponse200
 from .models.body import Body
 from .models.body_1 import Body1
-from .models.inline_response_200 import InlineResponse200
 from .models.body_2 import Body2
 from .models.body_3 import Body3
 from .models.body_4 import Body4
 from .models.body_5 import Body5
 
 # import apis into sdk package
-from .apis.default_api import DefaultApi
+from .apis.metrics_api import MetricsApi
+from .apis.v_api import VApi
+from .apis.ping_api import PingApi
 
 # import ApiClient
 from .api_client import ApiClient

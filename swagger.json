@@ -1,0 +1,2296 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "",
+    "title": "Marathon REST",
+    "description": "",
+    "license": {
+      "name": "MIT",
+      "url": "http://github.com/gruntjs/grunt/blob/master/LICENSE-MIT"
+    }
+  },
+  "securityDefinitions": {},
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v2/apps/{app_id}/restart": {
+      "post": {
+        "description": "Restart all tasks of this application.",
+        "tags": [
+          "v2"
+        ],
+        "operationId": "Create_V2AppsRestartByAppId_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "force",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "boolean",
+            "description": "Only one deployment can be applied to one application at the same time. If the existing deployment should be canceled by this change, you can set force=true.\nCaution&#58; setting force=true will cancel the current deployment. This paramter should be used only, if the current deployment is unsuccessful!"
+          },
+          {
+            "name": "app_id",
+            "in": "path",
+            "required": true,
+            "x-is-map": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Authentication is enabled and you did not provide enough or wrong information to authenticate that request."
+          },
+          "403": {
+            "description": "Forbidden. Authorization is granted but the identity provided does not have sufficient access rights to do that action."
+          },
+          "404": {
+            "description": "No task found with this `app_id`."
+          },
+          "409": {
+            "description": "There is an already running deployment, that affects this application. To override this deployment, use the force=true flag"
+          }
+        }
+      }
+    },
+    "/v2/apps/{app_id}/tasks/{task_id}": {
+      "delete": {
+        "description": "Kill the task with ID `task_id` that belongs to the application `app_id`.",
+        "tags": [
+          "v2"
+        ],
+        "operationId": "Delete_V2AppsTasksByAppIdAndTaskId_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "force",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "boolean",
+            "description": "Only one deployment can be applied to one application at the same time. If the existing deployment should be canceled by this change, you can set force=true.\nCaution&#58; setting force=true will cancel the current deployment. This paramter should be used only, if the current deployment is unsuccessful!"
+          },
+          {
+            "name": "scale",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "boolean",
+            "description": "If `scale=true` is specified, then the application is scaled down by the number of killed tasks."
+          },
+          {
+            "name": "app_id",
+            "in": "path",
+            "required": true,
+            "x-is-map": false,
+            "type": "string"
+          },
+          {
+            "name": "task_id",
+            "in": "path",
+            "required": true,
+            "x-is-map": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "401": {
+            "description": "Unauthorized. Authentication is enabled and you did not provide enough or wrong information to authenticate that request."
+          },
+          "403": {
+            "description": "Forbidden. Authorization is granted but the identity provided does not have sufficient access rights to do that action."
+          },
+          "404": {
+            "description": "No task found with this task_id."
+          },
+          "409": {
+            "description": "There is an already running deployment, that affects this application. To override this deployment, use the force=true flag"
+          }
+        }
+      }
+    },
+    "/v2/apps/{app_id}/tasks": {
+      "get": {
+        "description": "List all running tasks for application `app_id`.",
+        "tags": [
+          "v2"
+        ],
+        "operationId": "Get_V2AppsTasksByAppId_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "app_id",
+            "in": "path",
+            "required": true,
+            "x-is-map": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Authentication is enabled and you did not provide enough or wrong information to authenticate that request."
+          },
+          "403": {
+            "description": "Forbidden. Authorization is granted but the identity provided does not have sufficient access rights to do that action."
+          },
+          "404": {
+            "description": "No task found with this `app_id`."
+          }
+        }
+      },
+      "delete": {
+        "description": "Kill tasks that belong to the application `app_id`",
+        "tags": [
+          "v2"
+        ],
+        "operationId": "Delete_V2AppsTasksByAppId_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "force",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "boolean",
+            "description": "Only one deployment can be applied to one application at the same time. If the existing deployment should be canceled by this change, you can set force=true.\nCaution&#58; setting force=true will cancel the current deployment. This paramter should be used only, if the current deployment is unsuccessful!"
+          },
+          {
+            "name": "host",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": "all tasks of that application on the supplied slave are killed"
+          },
+          {
+            "name": "scale",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "boolean",
+            "description": "If `scale=true` is specified, then the application is scaled down by the number of killed tasks."
+          },
+          {
+            "name": "app_id",
+            "in": "path",
+            "required": true,
+            "x-is-map": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "401": {
+            "description": "Unauthorized. Authentication is enabled and you did not provide enough or wrong information to authenticate that request."
+          },
+          "403": {
+            "description": "Forbidden. Authorization is granted but the identity provided does not have sufficient access rights to do that action."
+          },
+          "404": {
+            "description": "No task found with this `app_id`."
+          },
+          "409": {
+            "description": "There is an already running deployment, that affects this application. To override this deployment, use the force=true flag"
+          }
+        }
+      }
+    },
+    "/v2/apps/{app_id}/versions/{version}": {
+      "get": {
+        "description": "List the configuration of the application with id `app_id` at version `version`.",
+        "tags": [
+          "v2"
+        ],
+        "operationId": "Get_V2AppsVersionsByAppIdAndVersion_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "app_id",
+            "in": "path",
+            "required": true,
+            "x-is-map": false,
+            "type": "string"
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "x-is-map": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Authentication is enabled and you did not provide enough or wrong information to authenticate that request."
+          },
+          "403": {
+            "description": "Forbidden. Authorization is granted but the identity provided does not have sufficient access rights to do that action."
+          },
+          "404": {
+            "description": "No task found with this `app_id`."
+          }
+        }
+      }
+    },
+    "/v2/apps/{app_id}/versions": {
+      "get": {
+        "description": "List the versions of the application with id `app_id`",
+        "tags": [
+          "v2"
+        ],
+        "operationId": "Get_V2AppsVersionsByAppId_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "app_id",
+            "in": "path",
+            "required": true,
+            "x-is-map": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Authentication is enabled and you did not provide enough or wrong information to authenticate that request."
+          },
+          "403": {
+            "description": "Forbidden. Authorization is granted but the identity provided does not have sufficient access rights to do that action."
+          },
+          "404": {
+            "description": "No task found with this `app_id`."
+          }
+        }
+      }
+    },
+    "/v2/apps/{app_id}": {
+      "get": {
+        "description": "Get the application with id `app_id`. The response includes some status information besides the current configuration of the app. You can specify optional embed arguments, to get more embedded information.",
+        "tags": [
+          "v2"
+        ],
+        "operationId": "Get_V2AppsByAppId_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "embed",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "object",
+            "description": "Embeds nested resources that match the supplied path. You can specify this parameter multiple times with different values. <br/>\n- <code>app.tasks</code>. embed tasks Note&#58; if this embed is definded, it automatically sets <code>apps.deployments</code> but this will change in a future release. Please define all embeds explicitly.\n- <code>app.counts</code>. embed all task counts (tasksStaged, tasksRunning, tasksHealthy, tasksUnhealthy) <br/> Note&#58; currently embedded by default but this will change in a future release. Please define all embeds explicitly.\n- <code>app.deployments</code>. embed all deployment identifier, if the related app currently is in deployment.\n- <code>app.lastTaskFailure</code> embeds the lastTaskFailure for the application if there is one.\n- <code>app.failures</code> Shorthand for apps.lastTaskFailure, apps.tasks, apps.counts and apps.deployments.<br/> Note&#58; deprecated and will be removed in future versions Please define all embeds explicitly.\n- <code>app.taskStats</code> exposes task statatistics in the JSON."
+          },
+          {
+            "name": "app_id",
+            "in": "path",
+            "required": true,
+            "x-is-map": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Authentication is enabled and you did not provide enough or wrong information to authenticate that request."
+          },
+          "403": {
+            "description": "Forbidden. Authorization is granted but the identity provided does not have sufficient access rights to do that action."
+          },
+          "404": {
+            "description": "No task found with this `app_id`."
+          }
+        }
+      },
+      "put": {
+        "description": "Replaces parameters of a running application. If no application with the given id exists, it will be created. If there is an application with this id, all running instances get upgraded to the new definition.\n\nNote&#58;  This operation will create a deployment. The operation finishes, if the deployment succeeds. You can query the deployments endoint to see the status of the deployment.",
+        "tags": [
+          "v2"
+        ],
+        "operationId": "Update_V2AppsByAppId_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "force",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "boolean",
+            "description": "Only one deployment can be applied to one application at the same time. If the existing deployment should be canceled by this change, you can set force=true.\nCaution&#58; setting force=true will cancel the current deployment. This paramter should be used only, if the current deployment is unsuccessful!"
+          },
+          {
+            "name": "app_id",
+            "in": "path",
+            "required": true,
+            "x-is-map": false,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "x-is-map": false,
+            "schema": {
+              "$ref": "#/definitions/V2Appsrequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "400": {
+            "description": "The application definition provided in the body is not valid."
+          },
+          "401": {
+            "description": "Unauthorized. Authentication is enabled and you did not provide enough or wrong information to authenticate that request."
+          },
+          "403": {
+            "description": "Forbidden. Authorization is granted but the identity provided does not have sufficient access rights to do that action."
+          },
+          "404": {
+            "description": "No task found with this `app_id`."
+          },
+          "409": {
+            "description": "There is an already running deployment, that affects this application. To override this deployment, use the force=true flag"
+          },
+          "422": {
+            "description": "The entity send can not be preocessed, since there are validation errors"
+          }
+        }
+      },
+      "delete": {
+        "description": "Destroy an application. All data about that application will be deleted.\nNote&#58;  This operation will create a deployment. The operation finishes, if the deployment succeeds. You can query the deployments endoint to see the status of the deployment.",
+        "tags": [
+          "v2"
+        ],
+        "operationId": "Delete_V2AppsByAppId_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "force",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "boolean",
+            "description": "Only one deployment can be applied to one application at the same time. If the existing deployment should be canceled by this change, you can set force=true.\nCaution&#58; setting force=true will cancel the current deployment. This paramter should be used only, if the current deployment is unsuccessful!"
+          },
+          {
+            "name": "app_id",
+            "in": "path",
+            "required": true,
+            "x-is-map": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "401": {
+            "description": "Unauthorized. Authentication is enabled and you did not provide enough or wrong information to authenticate that request."
+          },
+          "403": {
+            "description": "Forbidden. Authorization is granted but the identity provided does not have sufficient access rights to do that action."
+          },
+          "404": {
+            "description": "No app with this id known."
+          },
+          "409": {
+            "description": "There is an already running deployment, that affects this application. To override this deployment, use the force=true flag"
+          }
+        }
+      }
+    },
+    "/v2/apps": {
+      "get": {
+        "description": "Get the list of running applications. Several filters can be applied via the following query parameters.",
+        "tags": [
+          "v2"
+        ],
+        "operationId": "Get_V2Apps_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cmd",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": "Filter the result to only return apps whose `cmd` field contains the given value"
+          },
+          {
+            "name": "id",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": "Filter the result to only return apps whose `id` is or contains the given value"
+          },
+          {
+            "name": "label",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": "A label selector query contains one or more label selectors, which are comma separated. Marathon supports three types of selectors existence-based, equality-based and set-based. In the case of multiple selectors, all must be satisfied so comma separator acts as an AND logical operator. Labels and values must consist of alphanumeric characters plus `-` `_` and `.` `-A-Za-z0-9_.`. Any other character is possible, but must be escaped with a backslash character.\n* <code>Existence based Selector Query</code> Matches the existence of a label <br/> Example&#58; my_label,environment\n* <code>Equality based Selector Query</code> Matches existence of labels and the (non) equality of the value.<br/> Example&#58; environment==production, tier!=frontend\n* <code>Set based Selector Query</code> Matches existence of labels and the (non) existence of the value in a given set<br/> Example&#58; environment in (stage,production), tier notin (frontend, service)"
+          },
+          {
+            "name": "embed",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "object",
+            "description": "Embeds nested resources that match the supplied path. You can specify this parameter multiple times with different values.\n- <code>apps.tasks</code> embed all tasks of each application<br/> Note&#58; if this embed is definded, it automatically sets <code>apps.deployments</code> but this will change in a future release. Please define all embeds explicitly.\n- <code>apps.counts</code> embed all task counts (tasksStaged, tasksRunning, tasksHealthy, tasksUnhealthy) <br/> Note&#58; currently embedded by default but this will change in a future release. Please define all embeds explicitly.\n- <code>apps.deployments</code> embed all deployment identifier, if the related app currently is in deployment.\n- <code>apps.lastTaskFailure</code> embeds the lastTaskFailure for the application if there is one.\n- <code>apps.failures</code> Shorthand for apps.lastTaskFailure, apps.tasks, apps.counts and apps.deployments.<br/> Note&#58; deprecated and will be removed in future versions Please define all embeds explicitly.\n- <code>apps.taskStats</code> exposes task statatistics in the JSON."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Authentication is enabled and you did not provide enough or wrong information to authenticate that request."
+          },
+          "403": {
+            "description": "Forbidden. Authorization is granted but the identity provided does not have sufficient access rights to do that action."
+          }
+        }
+      },
+      "put": {
+        "description": "Change multiple applications either by upgrading existing ones or creating new ones. If there is an update to an already running application, the application gets upgraded. All instances of this application get replaced by the new version. The order of dependencies will be applied correctly. The upgradeStrategy defines the behaviour of the upgrade.\nIf the id of the application is not known, the application gets started. The order of dependencies will be applied correctly. It is possible to mix upgrades and installs.\nIf you have more complex scenarios with upgrades, use the groups endpoint.\nNote&#58;  This operation will create a deployment. The operation finishes, if the deployment succeeds. You can query the deployments endoint to see the status of the deployment.",
+        "tags": [
+          "v2"
+        ],
+        "operationId": "Update_V2Apps_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "force",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "boolean",
+            "description": "Only one deployment can be applied to one application at the same time. If the existing deployment should be canceled by this change, you can set force=true.\nCaution&#58; setting force=true will cancel the current deployment. This paramter should be used only, if the current deployment is unsuccessful!"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "x-is-map": false,
+            "schema": {
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "400": {
+            "description": "The application definition provided in the body is not valid."
+          },
+          "401": {
+            "description": "Unauthorized. Authentication is enabled and you did not provide enough or wrong information to authenticate that request."
+          },
+          "403": {
+            "description": "Forbidden. Authorization is granted but the identity provided does not have sufficient access rights to do that action."
+          },
+          "409": {
+            "description": "There is an already deployed application with this name"
+          },
+          "422": {
+            "description": "The entity send can not be preocessed, since there are validation errors"
+          }
+        }
+      },
+      "post": {
+        "description": "Create and start a new application.\nNote&#58;  This operation will create a deployment. The operation finishes, if the deployment succeeds. You can query the deployments endoint to see the status of the deployment.",
+        "tags": [
+          "v2"
+        ],
+        "operationId": "Create_V2Apps_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "x-is-map": false,
+            "schema": {
+              "$ref": "#/definitions/V2Appsrequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "400": {
+            "description": "The application definition provided in the body is not valid."
+          },
+          "401": {
+            "description": "Unauthorized. Authentication is enabled and you did not provide enough or wrong information to authenticate that request."
+          },
+          "403": {
+            "description": "Forbidden. Authorization is granted but the identity provided does not have sufficient access rights to do that action."
+          },
+          "409": {
+            "description": "There is an already deployed application with this name"
+          },
+          "422": {
+            "description": "The entity send can not be preocessed, since there are validation errors"
+          }
+        }
+      }
+    },
+    "/v2/deployments/{deployment_id}": {
+      "delete": {
+        "description": "Revert the deployment with `deployment_id` by creating a new deployment which reverses all changes.",
+        "tags": [
+          "v2"
+        ],
+        "operationId": "Delete_V2DeploymentsByDeploymentId_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "force",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "boolean",
+            "description": "If set to <code>false</code> (the default) then the deployment is canceled and a new deployment is created to revert the changes of this deployment. Without concurrent deployments, this restores the configuration before this deployment. If set to <code>true</code>, then the deployment is still canceled but no rollback deployment is created."
+          },
+          {
+            "name": "deployment_id",
+            "in": "path",
+            "required": true,
+            "x-is-map": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "401": {
+            "description": "Unauthorized. Authentication is enabled and you did not provide enough or wrong information to authenticate that request."
+          },
+          "403": {
+            "description": "Forbidden. Authorization is granted but the identity provided does not have sufficient access rights to do that action."
+          },
+          "404": {
+            "description": "The deployment plan with the given id can not be found."
+          }
+        }
+      }
+    },
+    "/v2/deployments": {
+      "get": {
+        "description": "List all running deployments. A deployment is a change in the service setup.\nA deployment is identified by an id, affects a set of applications and is composed of deployment steps.\nEvery step contains a list of actions with following types\n* <code>StartApplication</code> starts an application, which is currently not running.\n* <code>StopApplication</code> stops an already running application.\n* <code>ScaleApplication</code> changes the number of instances of an application and allows to kill specified instances while scaling.\n* <code>RestartApplication</code> upgrades an already deployed application with a new version.\n* <code>ResolveArtifacts</code> Resolve all artifacts of an application",
+        "tags": [
+          "v2"
+        ],
+        "operationId": "Get_V2Deployments_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Authentication is enabled and you did not provide enough or wrong information to authenticate that request."
+          },
+          "403": {
+            "description": "Forbidden. Authorization is granted but the identity provided does not have sufficient access rights to do that action."
+          }
+        }
+      }
+    },
+    "/v2/groups/versions": {
+      "get": {
+        "description": "List all versions the group with the specified path.",
+        "tags": [
+          "v2"
+        ],
+        "operationId": "Get_V2GroupsVersions_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Authentication is enabled and you did not provide enough or wrong information to authenticate that request."
+          },
+          "403": {
+            "description": "Forbidden. Authorization is granted but the identity provided does not have sufficient access rights to do that action."
+          }
+        }
+      }
+    },
+    "/v2/groups/{group_id}/versions": {
+      "get": {
+        "description": "List all versions the group with the specified path.",
+        "tags": [
+          "v2"
+        ],
+        "operationId": "Get_V2GroupsVersionsByGroupId_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "group_id",
+            "in": "path",
+            "required": true,
+            "x-is-map": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Authentication is enabled and you did not provide enough or wrong information to authenticate that request."
+          },
+          "403": {
+            "description": "Forbidden. Authorization is granted but the identity provided does not have sufficient access rights to do that action."
+          }
+        }
+      }
+    },
+    "/v2/groups/{group_id}": {
+      "get": {
+        "description": "Get the group with all applications and all transitive child groups.",
+        "tags": [
+          "v2"
+        ],
+        "operationId": "Get_V2GroupsByGroupId_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "group_id",
+            "in": "path",
+            "required": true,
+            "x-is-map": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Authentication is enabled and you did not provide enough or wrong information to authenticate that request."
+          },
+          "403": {
+            "description": "Forbidden. Authorization is granted but the identity provided does not have sufficient access rights to do that action."
+          }
+        }
+      },
+      "put": {
+        "description": "Change parameters of a deployed application group. The new group parameters get applied.\n\n* Changes to application parameters will result in a restart of this application.\n* A new application added to the group will be started.\n* An existing application removed from the group will be stopped.\n\nIf there are no changes to the application definition, no restart is triggered. During restart marathon keeps track, that the configured amount of minimal running instances are _always_ available.\nThis method allows 2 special modes for the update operation>\n\n* Provide only the `version` field in the group definition. This will rollback the group to that given version\n* Provide only the `scaleBy` field will scale all transitive applications instance counts by the given factor.\n\nWhen one of version or scaleBy are set, nothing else than a version change or transitive instance count scaling will be applied. If both version and scaleBy are set, only a version rollback will be performed – the scaleBy value will not be applied.\nA deployment can run forever. This is the case, when the new application has a problem and does not become healthy. In this case, human interaction is needed with 2 possible choices\n\n* Rollback to an existing older version\n* Update with a newer version of the group which does not have the problems of the old one.\n\nSince the deployment of the group can take a considerable amount of time, this endpoint returns immediately with a version. The failure or success of the action is signalled via event. There is a group_change_success and group_change_failed with the given version.",
+        "tags": [
+          "v2"
+        ],
+        "operationId": "Update_V2GroupsByGroupId_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "force",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "boolean",
+            "description": "Only one deployment can be applied to one application at the same time. If the existing deployment should be canceled by this change, you can set force=true.\nCaution&#58; setting force=true will cancel the current deployment. This paramter should be used only, if the current deployment is unsuccessful!"
+          },
+          {
+            "name": "group_id",
+            "in": "path",
+            "required": true,
+            "x-is-map": false,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "x-is-map": false,
+            "schema": {
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "400": {
+            "description": "The group definition provided in the body is not valid."
+          },
+          "401": {
+            "description": "Unauthorized. Authentication is enabled and you did not provide enough or wrong information to authenticate that request."
+          },
+          "403": {
+            "description": "Forbidden. Authorization is granted but the identity provided does not have sufficient access rights to do that action."
+          },
+          "409": {
+            "description": "There is an already running deployment, that affects this application. To override this deployment, use the force=true flag"
+          },
+          "422": {
+            "description": "The entity send can not be preocessed, since there are validation errors"
+          }
+        }
+      },
+      "post": {
+        "description": "Create and start a new application group. Application groups can contain other application groups.",
+        "tags": [
+          "v2"
+        ],
+        "operationId": "Create_V2GroupsByGroupId_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "force",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "boolean",
+            "description": "Only one deployment can be applied to one application at the same time. If the existing deployment should be canceled by this change, you can set force=true.\nCaution&#58; setting force=true will cancel the current deployment. This paramter should be used only, if the current deployment is unsuccessful!"
+          },
+          {
+            "name": "group_id",
+            "in": "path",
+            "required": true,
+            "x-is-map": false,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "x-is-map": false,
+            "schema": {
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "400": {
+            "description": "The group definition provided in the body is not valid."
+          },
+          "401": {
+            "description": "Unauthorized. Authentication is enabled and you did not provide enough or wrong information to authenticate that request."
+          },
+          "403": {
+            "description": "Forbidden. Authorization is granted but the identity provided does not have sufficient access rights to do that action."
+          },
+          "409": {
+            "description": "There is an already deployed group with this name"
+          },
+          "422": {
+            "description": "The entity send can not be preocessed, since there are validation errors"
+          }
+        }
+      },
+      "delete": {
+        "description": "Destroy a group. All data about that group and all associated applications will be deleted. The failure or success of the action is signalled via events. There is a group_change_success and group_change_failed with the given version.",
+        "tags": [
+          "v2"
+        ],
+        "operationId": "Delete_V2GroupsByGroupId_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "force",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "boolean",
+            "description": "Only one deployment can be applied to one application at the same time. If the existing deployment should be canceled by this change, you can set force=true.\nCaution&#58; setting force=true will cancel the current deployment. This paramter should be used only, if the current deployment is unsuccessful!"
+          },
+          {
+            "name": "group_id",
+            "in": "path",
+            "required": true,
+            "x-is-map": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "401": {
+            "description": "Unauthorized. Authentication is enabled and you did not provide enough or wrong information to authenticate that request."
+          },
+          "403": {
+            "description": "Forbidden. Authorization is granted but the identity provided does not have sufficient access rights to do that action."
+          },
+          "409": {
+            "description": "There is an already running deployment, that affects this application. To override this deployment, use the force=true flag"
+          }
+        }
+      }
+    },
+    "/v2/groups": {
+      "get": {
+        "description": "Get the group with all applications and all transitive child groups.",
+        "tags": [
+          "v2"
+        ],
+        "operationId": "Get_V2Groups_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Authentication is enabled and you did not provide enough or wrong information to authenticate that request."
+          },
+          "403": {
+            "description": "Forbidden. Authorization is granted but the identity provided does not have sufficient access rights to do that action."
+          }
+        }
+      },
+      "put": {
+        "description": "Change parameters of a deployed application group. The new group parameters get applied.\n\n* Changes to application parameters will result in a restart of this application.\n* A new application added to the group will be started.\n* An existing application removed from the group will be stopped.\n\nIf there are no changes to the application definition, no restart is triggered. During restart marathon keeps track, that the configured amount of minimal running instances are _always_ available.\nThis method allows 2 special modes for the update operation>\n\n* Provide only the `version` field in the group definition. This will rollback the group to that given version\n* Provide only the `scaleBy` field will scale all transitive applications instance counts by the given factor.\n\nWhen one of version or scaleBy are set, nothing else than a version change or transitive instance count scaling will be applied. If both version and scaleBy are set, only a version rollback will be performed – the scaleBy value will not be applied.\nA deployment can run forever. This is the case, when the new application has a problem and does not become healthy. In this case, human interaction is needed with 2 possible choices\n\n* Rollback to an existing older version\n* Update with a newer version of the group which does not have the problems of the old one.\n\nSince the deployment of the group can take a considerable amount of time, this endpoint returns immediately with a version. The failure or success of the action is signalled via event. There is a group_change_success and group_change_failed with the given version.",
+        "tags": [
+          "v2"
+        ],
+        "operationId": "Update_V2Groups_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "force",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "boolean",
+            "description": "Only one deployment can be applied to one application at the same time. If the existing deployment should be canceled by this change, you can set force=true.\nCaution&#58; setting force=true will cancel the current deployment. This paramter should be used only, if the current deployment is unsuccessful!"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "x-is-map": false,
+            "schema": {
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "400": {
+            "description": "The group definition provided in the body is not valid."
+          },
+          "401": {
+            "description": "Unauthorized. Authentication is enabled and you did not provide enough or wrong information to authenticate that request."
+          },
+          "403": {
+            "description": "Forbidden. Authorization is granted but the identity provided does not have sufficient access rights to do that action."
+          },
+          "409": {
+            "description": "There is an already running deployment, that affects this application. To override this deployment, use the force=true flag"
+          },
+          "422": {
+            "description": "The entity send can not be preocessed, since there are validation errors"
+          }
+        }
+      },
+      "post": {
+        "description": "Create and start a new application group. Application groups can contain other application groups.",
+        "tags": [
+          "v2"
+        ],
+        "operationId": "Create_V2Groups_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "force",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "boolean",
+            "description": "Only one deployment can be applied to one application at the same time. If the existing deployment should be canceled by this change, you can set force=true.\nCaution&#58; setting force=true will cancel the current deployment. This paramter should be used only, if the current deployment is unsuccessful!"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "x-is-map": false,
+            "schema": {
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "400": {
+            "description": "The group definition provided in the body is not valid."
+          },
+          "401": {
+            "description": "Unauthorized. Authentication is enabled and you did not provide enough or wrong information to authenticate that request."
+          },
+          "403": {
+            "description": "Forbidden. Authorization is granted but the identity provided does not have sufficient access rights to do that action."
+          },
+          "409": {
+            "description": "There is an already deployed group with this name"
+          },
+          "422": {
+            "description": "The entity send can not be preocessed, since there are validation errors"
+          }
+        }
+      },
+      "delete": {
+        "description": "Destroy a group. All data about that group and all associated applications will be deleted. The failure or success of the action is signalled via events. There is a group_change_success and group_change_failed with the given version.",
+        "tags": [
+          "v2"
+        ],
+        "operationId": "Delete_V2Groups_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "force",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "boolean",
+            "description": "Only one deployment can be applied to one application at the same time. If the existing deployment should be canceled by this change, you can set force=true.\nCaution&#58; setting force=true will cancel the current deployment. This paramter should be used only, if the current deployment is unsuccessful!"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "401": {
+            "description": "Unauthorized. Authentication is enabled and you did not provide enough or wrong information to authenticate that request."
+          },
+          "403": {
+            "description": "Forbidden. Authorization is granted but the identity provided does not have sufficient access rights to do that action."
+          },
+          "409": {
+            "description": "There is an already running deployment, that affects this application. To override this deployment, use the force=true flag"
+          }
+        }
+      }
+    },
+    "/v2/tasks/delete": {
+      "post": {
+        "description": "Kill a list of running tasks.",
+        "tags": [
+          "v2"
+        ],
+        "operationId": "Create_V2TasksDelete_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "force",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "boolean",
+            "description": "Only one deployment can be applied to one application at the same time. If the existing deployment should be canceled by this change, you can set force=true.\nCaution&#58; setting force=true will cancel the current deployment. This paramter should be used only, if the current deployment is unsuccessful!"
+          },
+          {
+            "name": "scale",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "boolean",
+            "description": "If `scale=true` is specified, then the related application is scaled down by the number of killed tasks."
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "x-is-map": false,
+            "schema": {
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "400": {
+            "description": "There are unknown task ids, that can not be killed."
+          },
+          "401": {
+            "description": "Unauthorized. Authentication is enabled and you did not provide enough or wrong information to authenticate that request."
+          },
+          "403": {
+            "description": "Forbidden. Authorization is granted but the identity provided does not have sufficient access rights to do that action."
+          },
+          "409": {
+            "description": "There is an already running deployment, that affects this application. To override this deployment, use the force=true flag"
+          }
+        }
+      }
+    },
+    "/v2/tasks": {
+      "get": {
+        "description": "List all running tasks.",
+        "tags": [
+          "v2"
+        ],
+        "operationId": "Get_V2Tasks_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "enum": [
+              "running",
+              "staging"
+            ],
+            "type": "string",
+            "description": "Filter the list of tasks by status"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Authentication is enabled and you did not provide enough or wrong information to authenticate that request."
+          },
+          "403": {
+            "description": "Forbidden. Authorization is granted but the identity provided does not have sufficient access rights to do that action."
+          }
+        }
+      }
+    },
+    "/v2/artifacts/{path}": {
+      "get": {
+        "description": "Download an artifact from the artifact store. The path is the relative path in the artifact store.",
+        "tags": [
+          "v2"
+        ],
+        "operationId": "Get_V2ArtifactsByPath_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "path",
+            "in": "path",
+            "required": true,
+            "x-is-map": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "put": {
+        "description": "Upload an artifact to the artifact store. A multipart form upload request has to be performed. The form parameter name has to be ```file```. The path used to store the file is taken from the url path. The response holds the URL of the artifact in the artifact store in the Location Header.",
+        "tags": [
+          "v2"
+        ],
+        "operationId": "Update_V2ArtifactsByPath_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "path",
+            "in": "path",
+            "required": true,
+            "x-is-map": false,
+            "type": "string"
+          },
+          {
+            "name": "file",
+            "in": "formData",
+            "required": false,
+            "x-is-map": false,
+            "type": "file",
+            "description": "The file to upload"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "post": {
+        "description": "Upload an artifact to the artifact store. A multipart form upload request has to be performed. The form parameter name has to be ```file```. The path used to store the file is taken from the url path. The response holds the URL of the artifact in the artifact store in the Location Header.",
+        "tags": [
+          "v2"
+        ],
+        "operationId": "Create_V2ArtifactsByPath_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "path",
+            "in": "path",
+            "required": true,
+            "x-is-map": false,
+            "type": "string"
+          },
+          {
+            "name": "file",
+            "in": "formData",
+            "required": false,
+            "x-is-map": false,
+            "type": "file",
+            "description": "The file to upload"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "delete": {
+        "description": "Delete an artifact from the artifact store. The path is the relative path in the artifact store.",
+        "tags": [
+          "v2"
+        ],
+        "operationId": "Delete_V2ArtifactsByPath_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "path",
+            "in": "path",
+            "required": true,
+            "x-is-map": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/v2/artifacts": {
+      "post": {
+        "description": "Upload an artifact to the artifact store. A multipart form upload request has to be performed. The form parameter name has to be ```file```. The filename used in the artifact store, is the same as given by the form parameter. The response holds the URL of the artifact in the artifact store in the Location Header.",
+        "tags": [
+          "v2"
+        ],
+        "operationId": "Create_V2Artifacts_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "file",
+            "in": "formData",
+            "required": false,
+            "x-is-map": false,
+            "type": "file",
+            "description": "The file to upload"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/v2/events": {
+      "get": {
+        "description": "Attach to the marathon event stream.\nTo use this endpoint, the client has to accept the text/event-stream content type.\nPlease note a request to this endpoint will not be closed by the server. If an event happens on the server side, this event will be propagated to the client immediately. See [Server Sent Events](http://www.w3schools.com/html/html5_serversentevents.asp) for a more detailed explanation.\nNote for ApiConsole&#58; this function will not yield the expected result from inside ApiConsole.",
+        "tags": [
+          "v2"
+        ],
+        "operationId": "Get_V2Events_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "405": {
+            "description": "A request has been made without the correct Accept Header"
+          }
+        }
+      }
+    },
+    "/v2/eventSubscriptions": {
+      "get": {
+        "description": "List all event subscriber callback URLs. _NOTE To activate this endpoint, you need to startup a Marathon instance with `--event_subscriber http_callback`_",
+        "tags": [
+          "v2"
+        ],
+        "operationId": "Get_V2EventSubscriptions_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "post": {
+        "description": "Subscribe to the event callback mechanism with the specified callback URL.",
+        "tags": [
+          "v2"
+        ],
+        "operationId": "Create_V2EventSubscriptions_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "callbackUrl",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": "The URL to an endpoint that is able to handle post requests for every event that is send."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "Unregister a callback URL from the event subscribers list.",
+        "tags": [
+          "v2"
+        ],
+        "operationId": "Delete_V2EventSubscriptions_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "callbackUrl",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": "The URL to an endpoint that is able to handle post requests for every event that is send."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/v2/info": {
+      "get": {
+        "description": "Get info about the Marathon Instance",
+        "tags": [
+          "v2"
+        ],
+        "operationId": "Get_V2Info_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+    "/v2/leader": {
+      "get": {
+        "description": "Returns the current leader.",
+        "tags": [
+          "v2"
+        ],
+        "operationId": "Get_V2Leader_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "404": {
+            "description": "If there is no current leader."
+          }
+        }
+      },
+      "delete": {
+        "description": "Causes the current leader to abdicate, triggering a new election.",
+        "tags": [
+          "v2"
+        ],
+        "operationId": "Delete_V2Leader_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "404": {
+            "description": "If there is no current leader."
+          }
+        }
+      }
+    },
+    "/v2/plugins/{plugin_id}/{path}": {
+      "get": {
+        "description": "Get request is handled by the plugin.",
+        "tags": [
+          "v2"
+        ],
+        "operationId": "Get_V2PluginsByPluginIdAndPath_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "plugin_id",
+            "in": "path",
+            "required": true,
+            "x-is-map": false,
+            "type": "string"
+          },
+          {
+            "name": "path",
+            "in": "path",
+            "required": true,
+            "x-is-map": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "put": {
+        "description": "Put request is handled by the plugin.",
+        "tags": [
+          "v2"
+        ],
+        "operationId": "Update_V2PluginsByPluginIdAndPath_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "plugin_id",
+            "in": "path",
+            "required": true,
+            "x-is-map": false,
+            "type": "string"
+          },
+          {
+            "name": "path",
+            "in": "path",
+            "required": true,
+            "x-is-map": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "post": {
+        "description": "Post request is handled by the plugin.",
+        "tags": [
+          "v2"
+        ],
+        "operationId": "Create_V2PluginsByPluginIdAndPath_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "plugin_id",
+            "in": "path",
+            "required": true,
+            "x-is-map": false,
+            "type": "string"
+          },
+          {
+            "name": "path",
+            "in": "path",
+            "required": true,
+            "x-is-map": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "delete": {
+        "description": "Delete request is handled by the plugin.",
+        "tags": [
+          "v2"
+        ],
+        "operationId": "Delete_V2PluginsByPluginIdAndPath_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "plugin_id",
+            "in": "path",
+            "required": true,
+            "x-is-map": false,
+            "type": "string"
+          },
+          {
+            "name": "path",
+            "in": "path",
+            "required": true,
+            "x-is-map": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/v2/plugins": {
+      "get": {
+        "description": "Returns the list of all loaded plugins",
+        "tags": [
+          "v2"
+        ],
+        "operationId": "Get_V2Plugins_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+    "/v2/queue/{app_id}/delay": {
+      "delete": {
+        "description": "If an application fails too often in a specified amount of time (according to the application definition), the task launch will be delayed. This delay can be removed by calling this endpoint. The effect is, that the tasks of this application will be launched immediately.",
+        "tags": [
+          "v2"
+        ],
+        "operationId": "Delete_V2QueueDelayByAppId_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "app_id",
+            "in": "path",
+            "required": true,
+            "x-is-map": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/v2/queue": {
+      "get": {
+        "description": "List all the tasks queued up or waiting to be scheduled. This is mainly used for troubleshooting and occurs when scaling changes are requested and the volume of scaling changes out paces the ability to schedule those tasks.\nIn addition to the application in the queue, you see also the task count that needs to be started.\nIf the task has a rate limit, then a delay to the start gets applied. You can see this delay for every application with the seconds to wait before the next launch will be tried.",
+        "tags": [
+          "v2"
+        ],
+        "operationId": "Get_V2Queue_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Authentication is enabled and you did not provide enough or wrong information to authenticate that request."
+          },
+          "403": {
+            "description": "Forbidden. Authorization is granted but the identity provided does not have sufficient access rights to do that action."
+          }
+        }
+      }
+    },
+    "/ping": {
+      "get": {
+        "description": "Ping this Marathon instance.",
+        "tags": [
+          "ping"
+        ],
+        "operationId": "Get_Ping_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+    "/metrics": {
+      "get": {
+        "description": "Get metrics data from this Marathon instance",
+        "tags": [
+          "metrics"
+        ],
+        "operationId": "Get_Metrics_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "V2Appsrequest": {
+      "title": "V2 Apps request",
+      "type": "object",
+      "properties": {
+        "acceptedResourceRoles": {
+          "description": "Optional. A list of resource roles. Marathon considers only resource offers with roles in this list for launching tasks of this app. If you do not specify this, Marathon considers all resource offers with roles that have been configured by the `--default_accepted_resource_roles` command line flag. If no `--default_accepted_resource_roles` was given on startup, Marathon considers all resource offers. To register Marathon for a role, you need to specify the `--mesos_role` command line flag on startup. If you want to assign all resources of a slave to a role, you can use the `--default_role` argument when starting up the slave. If you need a more fine-grained configuration, you can use the `--resources` argument to specify resource shares per role. The Mesos master needs to be started with `--roles` followed by a comma-separated list of all roles you want to use across your cluster. See [the Mesos command line documentation](http://mesos.apache.org/documentation/latest/configuration/) for details.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "args": {
+          "description": "An array of strings that represents an alternative mode of specifying the command to run. This was motivated by safe usage of containerizer features like a custom Docker ENTRYPOINT. This args field may be used in place of cmd even when using the default command executor. This change mirrors API and semantics changes in the Mesos CommandInfo protobuf message starting with version `0.20.0`.  Either `cmd` or `args` must be supplied. It is invalid to supply both `cmd` and `args` in the same app.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "backoffFactor": {
+          "description": "Configures exponential backoff behavior when launching potentially sick apps. This prevents sandboxes associated with consecutively failing tasks from filling up the hard disk on Mesos slaves. The backoff period is multiplied by the factor for each consecutive failure until it reaches maxLaunchDelaySeconds. This applies also to tasks that are killed due to failing too many health checks.",
+          "type": "number",
+          "format": "double"
+        },
+        "backoffSeconds": {
+          "description": "Configures exponential backoff behavior when launching potentially sick apps. This prevents sandboxes associated with consecutively failing tasks from filling up the hard disk on Mesos slaves. The backoff period is multiplied by the factor for each consecutive failure until it reaches maxLaunchDelaySeconds. This applies also to tasks that are killed due to failing too many health checks.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "cmd": {
+          "description": "The command that is executed.  This value is wrapped by Mesos via `/bin/sh -c ${app.cmd}`.  Either `cmd` or `args` must be supplied. It is invalid to supply both `cmd` and `args` in the same app.",
+          "type": "string"
+        },
+        "constraints": {
+          "description": "Valid constraint operators are one of UNIQUE, CLUSTER, GROUP_BY, LIKE, UNLIKE.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "container": {
+          "$ref": "#/definitions/Container"
+        },
+        "cpus": {
+          "description": "The number of CPU shares this application needs per instance. This number does not have to be integer, but can be a fraction.",
+          "type": "number",
+          "format": "double"
+        },
+        "dependencies": {
+          "description": "A list of services upon which this application depends. An order is derived from the dependencies for performing start/stop and upgrade of the application. For example, an application /a relies on the services /b which itself relies on /c. To start all 3 applications, first /c is started than /b than /a.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "disk": {
+          "description": "How much disk space is needed for this application. This number does not have to be an integer, but can be a fraction.",
+          "type": "number",
+          "format": "double"
+        },
+        "env": {
+          "type": "object"
+        },
+        "executor": {
+          "description": "The executor to use to launch this application. Different executors are available. The simplest one (and the default if none is given) is //cmd, which takes the cmd and executes that on the shell level.",
+          "type": "string"
+        },
+        "fetch": {
+          "description": "Provided URIs are passed to Mesos fetcher module and resolved in runtime.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Fetch"
+          }
+        },
+        "healthChecks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HealthCheck"
+          }
+        },
+        "id": {
+          "description": "Unique identifier for the app consisting of a series of names separated by slashes. Each name must be at least 1 character and may only contain digits (`0-9`), dashes (`-`), dots (`.`), and lowercase letters (`a-z`). The name may not begin or end with a dash.",
+          "type": "string"
+        },
+        "instances": {
+          "description": "The number of instances of this application to start. Please note: this number can be changed any time as needed to scale the application.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "ipAddress": {
+          "description": "If an application definition includes the 'ipAddress' field, then Marathon will request a per-task IP from Mesos. A separate ports/portMappings configuration is then disallowed.",
+          "$ref": "#/definitions/IpAddress"
+        },
+        "labels": {
+          "description": "Attaching metadata to apps can be useful to expose additional information to other services, so we added the ability to place labels on apps (for example, you could label apps staging and production to mark services by their position in the pipeline).",
+          "type": "object"
+        },
+        "maxLaunchDelaySeconds": {
+          "description": "Configures exponential backoff behavior when launching potentially sick apps. This prevents sandboxes associated with consecutively failing tasks from filling up the hard disk on Mesos slaves. The backoff period is multiplied by the factor for each consecutive failure until it reaches maxLaunchDelaySeconds. This applies also to tasks that are killed due to failing too many health checks.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "mem": {
+          "description": "The amount of memory in MB that is needed for the application per instance.",
+          "type": "number",
+          "format": "double"
+        },
+        "ports": {
+          "description": "An array of required port resources on the agent host. The number of items in the array determines how many dynamic ports are allocated for every task. For every port that is zero, a globally unique (cluster-wide) port is assigned and provided as part of the app definition to be used in load balancing definitions.",
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "requirePorts": {
+          "description": "Normally, the host ports of your tasks are automatically assigned. This corresponds to the requirePorts value false which is the default. If you need more control and want to specify your host ports in advance, you can set requirePorts to true. This way the ports you have specified are used as host ports. That also means that Marathon can schedule the associated tasks only on hosts that have the specified ports available.",
+          "type": "boolean"
+        },
+        "residency": {
+          "description": "When using local persistent volumes that pin tasks onto agents, these values define how Marathon handles terminal states of these tasks.",
+          "$ref": "#/definitions/Residency"
+        },
+        "storeUrls": {
+          "description": "URL's that have to be resolved and put into the artifact store, before the task will be started.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "upgradeStrategy": {
+          "description": "During an upgrade all instances of an application get replaced by a new version. The upgradeStrategy controls how Marathon stops old versions and launches new versions.",
+          "$ref": "#/definitions/UpgradeStrategy"
+        },
+        "uris": {
+          "description": "URIs defined here are resolved, before the application gets started. If the application has external dependencies, they should be defined here.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "user": {
+          "description": "The user to use to run the tasks on the agent.",
+          "type": "string"
+        },
+        "version": {
+          "description": "The version of this definition.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "versionInfo": {
+          "description": "Detailed version information.",
+          "$ref": "#/definitions/VersionInfo"
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "Container": {
+      "title": "Container",
+      "type": "object",
+      "properties": {
+        "docker": {
+          "$ref": "#/definitions/Docker"
+        },
+        "type": {
+          "description": "Supported container types at the moment are DOCKER and MESOS.",
+          "$ref": "#/definitions/Type"
+        },
+        "volumes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Volume"
+          }
+        }
+      }
+    },
+    "Docker": {
+      "title": "Docker",
+      "type": "object",
+      "properties": {
+        "forcePullImage": {
+          "description": "The container will be pulled, regardless if it is already available on the local system.",
+          "type": "boolean"
+        },
+        "image": {
+          "description": "The name of the docker image to use.",
+          "type": "string"
+        },
+        "network": {
+          "description": "The networking mode, this container should operate in. One of BRIDGED|HOST|NONE",
+          "$ref": "#/definitions/Network"
+        },
+        "parameters": {
+          "description": "Allowing arbitrary parameters to be passed to docker CLI. Note that anything passed to this field is not guaranteed to be supported moving forward, as we might move away from the docker CLI.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Parameter"
+          }
+        },
+        "portMappings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PortMapping"
+          }
+        },
+        "privileged": {
+          "description": "Run this docker image in privileged mode.",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "image"
+      ]
+    },
+    "Network": {
+      "title": "Network",
+      "type": "string",
+      "enum": [
+        "BRIDGE",
+        "HOST",
+        "NONE"
+      ]
+    },
+    "Parameter": {
+      "title": "Parameter",
+      "type": "object",
+      "properties": {
+        "key": {
+          "description": "Key of this parameter",
+          "type": "string"
+        },
+        "value": {
+          "description": "Value of this parameter",
+          "type": "string"
+        }
+      },
+      "required": [
+        "key",
+        "value"
+      ]
+    },
+    "PortMapping": {
+      "title": "PortMapping",
+      "type": "object",
+      "properties": {
+        "containerPort": {
+          "description": "Refers to the port the application listens to inside of the container. It is optional and now defaults to 0, in which case Marathon assigns the container port the same value as the assigned hostPort. This is especially useful for apps that advertise the port they are listening on to the outside world for P2P communication. Without containerPort: 0 they would erroneously advertise their private container port which is usually not the same as the externally visible host port.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "hostPort": {
+          "description": "Retains the traditional meaning in Marathon, which is a random port from the range included in the Mesos resource offer. The resulting host ports for each task are exposed via the task details in the REST API and the Marathon web UI. hostPort is optional and defaults to 0.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "protocol": {
+          "description": "parameter is optional and defaults to tcp.",
+          "type": "string"
+        },
+        "servicePort": {
+          "description": "Is a helper port intended for doing service discovery using a well-known port per service. The assigned servicePort value is not used/interpreted by Marathon itself but supposed to used by load balancer infrastructure. See Service Discovery Load Balancing doc page. The servicePort parameter is optional and defaults to 0. Like hostPort, If the value is 0, a random port will be assigned. If a servicePort value is assigned by Marathon then Marathon guarantees that its value is unique across the cluster. The values for random service ports are in the range [local_port_min, local_port_max] where local_port_min and local_port_max are command line options with default values of 10000 and 20000, respectively.",
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "Type": {
+      "title": "Type",
+      "type": "string",
+      "enum": [
+        "DOCKER",
+        "MESOS"
+      ]
+    },
+    "Volume": {
+      "title": "Volume",
+      "type": "object",
+      "properties": {
+        "containerPath": {
+          "description": "The path of the volume in the container",
+          "type": "string"
+        },
+        "hostPath": {
+          "description": "The path of the volume on the host",
+          "type": "string"
+        },
+        "mode": {
+          "description": "Possible values are RO for ReadOnly and RW for Read/Write",
+          "$ref": "#/definitions/Mode"
+        },
+        "persistent": {
+          "$ref": "#/definitions/Persistent"
+        }
+      }
+    },
+    "Persistent": {
+      "title": "Persistent",
+      "type": "object",
+      "properties": {
+        "size": {
+          "description": "The size of the persistent volume in MiB",
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "Mode": {
+      "title": "Mode",
+      "type": "string",
+      "enum": [
+        "RO",
+        "RW"
+      ]
+    },
+    "Fetch": {
+      "title": "Fetch",
+      "type": "object",
+      "properties": {
+        "cache": {
+          "description": "Cache fetched artifact if supported by Mesos fetcher module",
+          "type": "boolean"
+        },
+        "executable": {
+          "description": "Set fetched artifact as executable",
+          "type": "boolean"
+        },
+        "extract": {
+          "description": "Extract fetched artifact if supported by Mesos fetcher module",
+          "type": "boolean"
+        },
+        "uri": {
+          "description": "URI to be fetched by Mesos fetcher module",
+          "type": "string"
+        }
+      },
+      "required": [
+        "uri"
+      ]
+    },
+    "HealthCheck": {
+      "title": "HealthCheck",
+      "type": "object",
+      "properties": {
+        "command": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Command"
+          }
+        },
+        "gracePeriodSeconds": {
+          "description": "Health check failures are ignored within this number of seconds of the task being started or until the task becomes healthy for the first time.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "ignoreHttp1xx": {
+          "description": "Ignore HTTP 1xx responses.",
+          "type": "boolean"
+        },
+        "intervalSeconds": {
+          "description": "Number of seconds to wait between health checks.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "maxConsecutiveFailures": {
+          "description": "Number of consecutive health check failures after which the unhealthy task should be killed.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "path": {
+          "description": "Path to endpoint exposed by the task that will provide health status. Example: /path/to/health. Note: only used if protocol == HTTP[S].",
+          "type": "string"
+        },
+        "port": {
+          "description": "The specific port to connect to. In case of dynamic ports, see portIndex.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "portIndex": {
+          "description": "Index in this app's ports array to be used for health requests. An index is used so the app can use random ports, like [0, 0, 0] for example, and tasks could be started with port environment variables like $PORT1.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "protocol": {
+          "description": "Protocol of the requests to be performed. One of HTTP, HTTPS, TCP or COMMAND.",
+          "$ref": "#/definitions/Protocol"
+        },
+        "timeoutSeconds": {
+          "description": "Number of seconds after which a health check is considered a failure regardless of the response.",
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "Command": {
+      "title": "Command",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The health check command to execute.",
+          "type": "string"
+        }
+      }
+    },
+    "Protocol": {
+      "title": "Protocol",
+      "type": "string",
+      "enum": [
+        "COMMAND",
+        "HTTP",
+        "HTTPS",
+        "TCP"
+      ]
+    },
+    "IpAddress": {
+      "title": "IpAddress",
+      "type": "object",
+      "properties": {
+        "discovery": {
+          "description": "Information useful for service discovery.",
+          "$ref": "#/definitions/Discovery"
+        },
+        "groups": {
+          "description": "Array of network groups. One IP address can belong to zero or more network groups. The idea is that containers can only reach containers with which they share at least one network group.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "labels": {
+          "description": "Key value pair for meta data on that network interface.",
+          "type": "object"
+        }
+      }
+    },
+    "Discovery": {
+      "title": "Discovery",
+      "type": "object",
+      "properties": {
+        "ports": {
+          "description": "Array of objects describing the ports exposed by each task.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Port"
+          }
+        }
+      }
+    },
+    "Port": {
+      "title": "Port",
+      "description": "Port",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the port.",
+          "type": "string"
+        },
+        "number": {
+          "description": "The port number.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "protocol": {
+          "description": "Protocol of the port (one of ['tcp', 'udp']).",
+          "$ref": "#/definitions/Protocol17"
+        }
+      }
+    },
+    "Protocol17": {
+      "title": "Protocol17",
+      "type": "string",
+      "enum": [
+        "tcp",
+        "udp"
+      ]
+    },
+    "Residency": {
+      "title": "Residency",
+      "type": "object",
+      "properties": {
+        "relaunchEscalationTimeoutSeconds": {
+          "description": "When a task using persistent local volumes cannot be restarted on the agent it's been pinned to, Marathon will try to launch this task on another node after this timeout. Defaults to 3600 (one hour).",
+          "type": "integer",
+          "format": "int64"
+        },
+        "taskLostBehavior": {
+          "description": "When Marathon receives a TASK_LOST status update indicating that the agent running the task is gone, this property defines whether Marathon will launch the task on another node or not. Defaults to WAIT_FOREVER",
+          "$ref": "#/definitions/TaskLostBehavior"
+        }
+      }
+    },
+    "TaskLostBehavior": {
+      "title": "TaskLostBehavior",
+      "type": "string",
+      "enum": [
+        "RELAUNCH_AFTER_TIMEOUT",
+        "WAIT_FOREVER"
+      ]
+    },
+    "UpgradeStrategy": {
+      "title": "UpgradeStrategy",
+      "type": "object",
+      "properties": {
+        "maximumOverCapacity": {
+          "description": "A number between 0 and 1 which is multiplied with the instance count. This is the maximum number of additional instances launched at any point of time during the upgrade process.",
+          "type": "number",
+          "format": "double"
+        },
+        "minimumHealthCapacity": {
+          "description": "A number between 0 and 1 that is multiplied with the instance count. This is the minimum number of healthy nodes that do not sacrifice overall application purpose. Marathon will make sure, during the upgrade process, that at any point of time this number of healthy instances are up.",
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "VersionInfo": {
+      "title": "VersionInfo",
+      "type": "object",
+      "properties": {
+        "lastConfigChangeAt": {
+          "description": "Contains the time stamp of the last change including changes like scaling or restarting the app. Since our versions are time based, this is currently equal to version.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "lastScalingAt": {
+          "description": "Contains the time stamp of the last change to this app which was not simply a scaling or a restarting configuration.",
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "statusEnum": {
+      "title": "statusEnum",
+      "type": "string",
+      "enum": [
+        "running",
+        "staging"
+      ]
+    }
+  }
+}

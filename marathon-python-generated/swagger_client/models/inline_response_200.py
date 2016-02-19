@@ -37,136 +37,13 @@ class InlineResponse200(object):
                                   and the value is json key in definition.
         """
         self.swagger_types = {
-            'groups': 'list[]',
-            'id': 'PathType',
-            'version': 'datetime',
-            'apps': 'list[AppDefinitionJson]',
-            'dependencies': 'list[PathType]'
+            
         }
 
         self.attribute_map = {
-            'groups': 'groups',
-            'id': 'id',
-            'version': 'version',
-            'apps': 'apps',
-            'dependencies': 'dependencies'
+            
         }
 
-        self._groups = None
-        self._id = None
-        self._version = None
-        self._apps = None
-        self._dependencies = None
-
-    @property
-    def groups(self):
-        """
-        Gets the groups of this InlineResponse200.
-        Groups can build a tree. Each group can contain sub-groups. The sub-groups are defined here.
-
-        :return: The groups of this InlineResponse200.
-        :rtype: list[]
-        """
-        return self._groups
-
-    @groups.setter
-    def groups(self, groups):
-        """
-        Sets the groups of this InlineResponse200.
-        Groups can build a tree. Each group can contain sub-groups. The sub-groups are defined here.
-
-        :param groups: The groups of this InlineResponse200.
-        :type: list[]
-        """
-        self._groups = groups
-
-    @property
-    def id(self):
-        """
-        Gets the id of this InlineResponse200.
-        Unique identifier for the app consisting of a series of names separated by slashes. Each name must be at least 1 character and may only contain digits (`0-9`), dashes (`-`), dots (`.`), and lowercase letters (`a-z`). The name may not begin or end with a dash.
-
-        :return: The id of this InlineResponse200.
-        :rtype: PathType
-        """
-        return self._id
-
-    @id.setter
-    def id(self, id):
-        """
-        Sets the id of this InlineResponse200.
-        Unique identifier for the app consisting of a series of names separated by slashes. Each name must be at least 1 character and may only contain digits (`0-9`), dashes (`-`), dots (`.`), and lowercase letters (`a-z`). The name may not begin or end with a dash.
-
-        :param id: The id of this InlineResponse200.
-        :type: PathType
-        """
-        self._id = id
-
-    @property
-    def version(self):
-        """
-        Gets the version of this InlineResponse200.
-        The version of this definition.
-
-        :return: The version of this InlineResponse200.
-        :rtype: datetime
-        """
-        return self._version
-
-    @version.setter
-    def version(self, version):
-        """
-        Sets the version of this InlineResponse200.
-        The version of this definition.
-
-        :param version: The version of this InlineResponse200.
-        :type: datetime
-        """
-        self._version = version
-
-    @property
-    def apps(self):
-        """
-        Gets the apps of this InlineResponse200.
-        The list of AppDefinitions in this group. See AppDefinition.json for the schema.
-
-        :return: The apps of this InlineResponse200.
-        :rtype: list[AppDefinitionJson]
-        """
-        return self._apps
-
-    @apps.setter
-    def apps(self, apps):
-        """
-        Sets the apps of this InlineResponse200.
-        The list of AppDefinitions in this group. See AppDefinition.json for the schema.
-
-        :param apps: The apps of this InlineResponse200.
-        :type: list[AppDefinitionJson]
-        """
-        self._apps = apps
-
-    @property
-    def dependencies(self):
-        """
-        Gets the dependencies of this InlineResponse200.
-        A list of services upon which this application depends. An order is derived from the dependencies for performing start/stop and upgrade of the application. For example, an application /a relies on the services /b which itself relies on /c. To start all 3 applications, first /c is started than /b than /a.
-
-        :return: The dependencies of this InlineResponse200.
-        :rtype: list[PathType]
-        """
-        return self._dependencies
-
-    @dependencies.setter
-    def dependencies(self, dependencies):
-        """
-        Sets the dependencies of this InlineResponse200.
-        A list of services upon which this application depends. An order is derived from the dependencies for performing start/stop and upgrade of the application. For example, an application /a relies on the services /b which itself relies on /c. To start all 3 applications, first /c is started than /b than /a.
-
-        :param dependencies: The dependencies of this InlineResponse200.
-        :type: list[PathType]
-        """
-        self._dependencies = dependencies
 
     def to_dict(self):
         """
