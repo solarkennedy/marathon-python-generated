@@ -1,3 +1,5 @@
 node_modules
 marathon-code
 swagger-codegen-cli.jar
+marathon-python-generated/venv/
+*.pyc
